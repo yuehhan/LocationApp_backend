@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const placesRoutes = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
-
+// const UserName = process.env.USER_NAME || want to figure out how to work on this in production as well -- work on later
 const app = express();
 
 app.use(bodyParser.json());
@@ -51,7 +51,9 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-ntrwp.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   )
+  
   .then(() => {
+    console.log("hosting on 5000")
     app.listen(process.env.PORT || 5000);
   })
   .catch(err => {
